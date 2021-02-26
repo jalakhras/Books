@@ -2,6 +2,10 @@
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost/44313",
+      "sslPort": 0
+    },
     "iisExpress": {
       "applicationUrl": "https://localhost:44313/",
       "sslPort": 44353
@@ -17,9 +21,9 @@
       }
     },
     "Books.API": {
-      "commandName": "Project",
+      "commandName": "IIS",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchUrl": "http://localhost/44313/api/books",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
