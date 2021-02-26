@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Books.API.Services
 {
-    public interface IBookRepository
+    public interface IBooksRepository
     {
         Task<IEnumerable<Book>> GetBooksAsync();
 
