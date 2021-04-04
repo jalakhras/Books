@@ -9,6 +9,8 @@ namespace Books.API.Profiles
             CreateMap<Entity.Book, Models.Book>()
                 .ForMember(dest => dest.Author, opt => opt.MapFrom(src =>
                     $"{src.Author.FirstName} {src.Author.LastName}"));
+
+            CreateMap<Models.BookForCreation, Entity.Book>();
         }
     }
 }

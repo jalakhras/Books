@@ -17,7 +17,6 @@ namespace Books.API.Services
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-
         public async Task<Book> GetBookByIdAsync(Guid id)
         {
             await _context.Database.ExecuteSqlRawAsync("WAITFOR DELAY '00:00:02';");
@@ -29,9 +28,9 @@ namespace Books.API.Services
         {
             //await _context.Database.ExecuteSqlRawAsync("WAITFOR DELAY '00:00:04';");
             return await _context.Books.Include(b => b.Author).ToListAsync();
-        } 
-        
-        public  IEnumerable<Book> GetBooks()
+        }
+
+        public IEnumerable<Book> GetBooks()
         {
             _context.Database.ExecuteSqlRaw("WAITFOR DELAY '00:00:04';");
             return _context.Books.Include(b => b.Author).ToList();
@@ -52,9 +51,21 @@ namespace Books.API.Services
                     _context.Dispose();
                     _context = null;
                 }
-
             }
         }
 
+        public void AddBook(Book bookToAdd)
+        {
+            if (bookToAdd == null)
+            {
+                throw new ArgumentNullException(nameof(bookToAdd));
+            }
+             _context.Add(bookToAdd);
+        }
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            return await _context.SaveChangesAsync() > 0;
+        }
     }
 }
