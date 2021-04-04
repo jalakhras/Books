@@ -29,6 +29,10 @@ namespace Books.API.Services
             //await _context.Database.ExecuteSqlRawAsync("WAITFOR DELAY '00:00:04';");
             return await _context.Books.Include(b => b.Author).ToListAsync();
         }
+        public async Task<IEnumerable<Book>> GetBooksAsync(IEnumerable<Guid> booksIds)
+        {
+            return await _context.Books.Where(b=>booksIds.Contains(b.Id)).Include(b => b.Author).ToListAsync();
+        }
 
         public IEnumerable<Book> GetBooks()
         {
@@ -67,5 +71,7 @@ namespace Books.API.Services
         {
             return await _context.SaveChangesAsync() > 0;
         }
+
+      
     }
 }

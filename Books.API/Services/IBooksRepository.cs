@@ -9,6 +9,7 @@ namespace Books.API.Services
     {
         IEnumerable<Book> GetBooks();
         Task<IEnumerable<Book>> GetBooksAsync();
+        Task<IEnumerable<Book>> GetBooksAsync(IEnumerable<Guid> booksIds);
 
         Task<Book> GetBookByIdAsync(Guid id);
         void AddBook(Book bookToAdd);
