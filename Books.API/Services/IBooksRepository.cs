@@ -10,6 +10,6 @@ namespace Books.API.Services
         IEnumerable<Book> GetBooks();
         Task<IEnumerable<Book>> GetBooksAsync();
 
-        Task<Book> GetBookAsync(Guid id);
+        Task<Book> GetBookByIdAsync(Guid id);
     }
 }

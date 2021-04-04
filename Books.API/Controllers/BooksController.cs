@@ -30,9 +30,9 @@ namespace Books.API.Controllers
         [HttpGet]
         [Route("{id}")]
         [BookResultFilter]
-        public async Task<IActionResult> GetBook(Guid id)
+        public async Task<IActionResult> GetBookById(Guid id)
         {
-            var bookEntity = await _booksRepository.GetBookAsync(id);
+            var bookEntity = await _booksRepository.GetBookByIdAsync(id);
             if (bookEntity == null)
             {
                 return NotFound();

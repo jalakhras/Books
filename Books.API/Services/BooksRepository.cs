@@ -18,7 +18,7 @@ namespace Books.API.Services
         }
 
 
-        public async Task<Book> GetBookAsync(Guid id)
+        public async Task<Book> GetBookByIdAsync(Guid id)
         {
             await _context.Database.ExecuteSqlRawAsync("WAITFOR DELAY '00:00:02';");
             return await _context.Books
@@ -27,7 +27,7 @@ namespace Books.API.Services
 
         public async Task<IEnumerable<Book>> GetBooksAsync()
         {
-            await _context.Database.ExecuteSqlRawAsync("WAITFOR DELAY '00:00:04';");
+            //await _context.Database.ExecuteSqlRawAsync("WAITFOR DELAY '00:00:04';");
             return await _context.Books.Include(b => b.Author).ToListAsync();
         } 
         
