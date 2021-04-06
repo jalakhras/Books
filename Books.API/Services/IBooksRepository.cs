@@ -1,4 +1,5 @@
 ﻿using Books.API.Entity;
+using Books.API.ExternalModels;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -13,6 +14,11 @@ namespace Books.API.Services
 
         Task<Book> GetBookByIdAsync(Guid id);
         void AddBook(Book bookToAdd);
+
+        Task<BookCover> GetBookCoverAsync(string coverId);
+        Task<IEnumerable<BookCover>> GetBookCoversAsync(Guid bookId);
+
+
         Task<bool> SaveChangesAsync();
     }
 }

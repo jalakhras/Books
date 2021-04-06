@@ -4,6 +4,8 @@ using Books.API.Models;
 using Books.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Books.API.Controllers
@@ -22,6 +24,8 @@ namespace Books.API.Controllers
 
             _mapper = mapper ??
                 throw new ArgumentNullException(nameof(mapper));
+
+          
         }
 
         [HttpGet]
@@ -35,6 +39,7 @@ namespace Books.API.Controllers
         [HttpGet]
         [Route("{id}",Name = "GetBook")]
         [BookResultFilter]
+        [BookWithCoversResultFilter ]
         public async Task<IActionResult> GetBookById(Guid id)
         {
             var bookEntity = await _booksRepository.GetBookByIdAsync(id);
@@ -42,8 +47,12 @@ namespace Books.API.Controllers
             {
                 return NotFound();
             }
-
-            return Ok(bookEntity);
+            var bookCovers = await _booksRepository.GetBookCoversAsync(id);
+            //var propertyBag = new Tuple<Entity.Book, IEnumerable<ExternalModels.BookCover>>
+            //    (bookEntity, bookCovers);
+            //(Entity.Book book, IEnumerable<ExternalModels.BookCover> bookCovers)
+            //    propertyBag = (bookEntity, bookCovers);
+            return Ok((bookEntity,  bookCovers));
         }
 
         [HttpPost]
